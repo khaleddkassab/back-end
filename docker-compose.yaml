@@ -1,0 +1,42 @@
+version: '3'
+services:
+
+  mongodb:
+    build:
+      context: ./data-base
+    container_name: mongodb
+    ports:
+      - "${MONGODB_PORT:-27018}:27017"
+
+  back-end:
+    build:
+      context: ./back-end  # Replace with the actual path to your backend code
+      args:
+        - PORT=${BACKEND_API_PORT:-8084}
+        - MONGODB_URI=${MONGODB_URI:-mongodb://mongodb:${MONGODB_PORT:-27017}/usersdb}
+        - ANGULAR_URI=${ANGULAR_URI:-http://localhost}
+        - ANGULAR_PORT=${ANGULAR_PORT:-5000}
+    container_name: back-end
+    restart: always
+    ports:
+      - ${BACKEND_API_PORT:-8084}:${BACKEND_API_PORT:-8084}
+    depends_on:
+      - mongodb
+      - front-end
+    environment:
+      - BACKEND_API_PORT=${BACKEND_API_PORT:-8084}
+      - MONGODB_URI=${MONGODB_URI:-mongodb://mongodb:${MONGODB_PORT:-27017}/usersdb}
+      - ANGULAR_URI=${ANGULAR_URI:-http://localhost}
+      - ANGULAR_PORT=${ANGULAR_PORT:-5000}
+
+  front-end:
+    build:
+      context: ./front-end  # Replace with the actual path to your frontend code
+    container_name: front-end
+    environment:
+      - BACKEND_API_URI=${BACKEND_API_URI:-http://localhost:8084}
+      - ANGULAR_PORT=${ANGULAR_PORT:-5000}  # Use the same value as in the back-end service
+    ports:
+      - ${ANGULAR_PORT:-5000}:80
+    env_file:
+      - front-end/.env
