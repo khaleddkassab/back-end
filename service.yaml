@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: clinic-reservation-backend-service
+spec:
+  selector:
+    app: clinic-reservation-backend
+  ports:
+  - protocol: TCP
+    port: 8084
+    targetPort: 8084
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: clinic-reservation-frontend-service
+spec:
+  selector:
+    app: clinic-reservation-frontend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: clinic-reservation-mongodb-service
+spec:
+  selector:
+    app: clinic-reservation-mongodb
+  ports:
+  - protocol: TCP
+    port: 27017
+    targetPort: 27017
