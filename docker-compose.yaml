@@ -6,7 +6,7 @@ services:
       context: ./data-base
     container_name: mongodb
     ports:
-      - "${MONGODB_PORT:-27018}:27017"
+      - "${MONGODB_PORT:-27017}:27017"
 
   back-end:
     build:
