@@ -14,7 +14,7 @@ require('dotenv').config();
 const angularUrl = process.env.ANGULAR_URI || "https://clinicfrontt-khaleddkassab-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com";
 
 app.use(cors({
-  origin:angularUrl
+  origin:'*'
 }));
 
 
