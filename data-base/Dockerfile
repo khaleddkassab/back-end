@@ -1,9 +1,11 @@
+# Use the official MongoDB image as the base image
 FROM mongo
 
+# Set the working directory inside the container
+WORKDIR /data/db
 
+# Expose the default MongoDB port
+EXPOSE 27017
 
-WORKDIR /usr/src/app
-RUN mkdir -p /data/db
-
-
+# Start the MongoDB server when the container starts
 CMD ["mongod"]

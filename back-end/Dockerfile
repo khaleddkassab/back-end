@@ -20,12 +20,10 @@ COPY .env .env
 ARG PORT
 ARG MONGODB_URI
 ARG ANGULAR_URI
-ARG ANGULAR_PORT
 # Set environment variables for runtime
 ENV PORT=$PORT
 ENV MONGODB_URI=$MONGODB_URI
 ENV ANGULAR_URI=$ANGULAR_URI
-ENV ANGULAR_PORT=$ANGULAR_PORT
 # Expose the app's port (optional, doesn't actually publish the port)
 EXPOSE $PORT
 

@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo
+        ports:
+        - containerPort: 27017
+        volumeMounts:
+        - name: mongo-data
+          mountPath: /data/db
+        # Uncomment the following lines if using a ConfigMap
+        # - name: mongo-config
+        #   mountPath: /etc/mongod.conf
+        #   subPath: mongod.conf
+      # Uncomment the following lines if using a ConfigMap
+      # volumes:
+      # - name: mongo-config
+      #   configMap:
+      #     name: mongo-config
+  volumes:
+  - name: mongo-data
+    emptyDir: {}

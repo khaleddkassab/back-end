@@ -11,10 +11,10 @@ const verifyToken = require('./middlewares/authJWT'); // Use a relative path to 
 const cors = require('cors');
 require('dotenv').config();
 
-const angularUrl = process.env.ANGULAR_URI+":"+process.env.ANGULAR_PORT ;
+const angularUrl = process.env.ANGULAR_URI || "https://clinicfrontt-khaleddkassab-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com";
 
 app.use(cors({
-  origin:angularUrl
+  origin: '*'
 }));
 
 
@@ -63,7 +63,7 @@ app.use(messagesRoutes);
 const port = parseInt(process.env.PORT);
 
 console.log('DATABASE URI :', process.env.MONGODB_URI)
-console.log('FRONTEND URI :', process.env.ANGULAR_URI,":",process.env.ANGULAR_PORT)
+console.log('FRONTEND URI :', process.env.ANGULAR_URI)
 
 app.listen(port, () => {
   console.log(`Server is live on port ${port}`, ` live on URI ${mongoUrl}`);
