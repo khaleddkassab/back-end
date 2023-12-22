@@ -32,8 +32,6 @@ services:
     build:
       context: ./front-end # Replace with the actual path to your frontend code
     container_name: front-end
-    environment:
-      - BACKEND_API_URI=${BACKEND_API_URI:-http://localhost:8084}
     ports:
       - ${ANGULAR_PORT:-5000}:80
     env_file:
