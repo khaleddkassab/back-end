@@ -14,7 +14,7 @@ require('dotenv').config();
 const angularUrl = process.env.ANGULAR_URI+":"+process.env.ANGULAR_PORT ;
 
 app.use(cors({
-  origin:angularUrl
+  origin:'*'
 }));
 
 
